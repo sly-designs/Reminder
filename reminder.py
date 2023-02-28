@@ -19,3 +19,17 @@ def is_laptop_on():
         return plugged or percent > 5
     else:
         return True
+
+# Send email
+def send_email(subject, body):
+    message = MIMEText(body)
+    message['subject'] = subject
+    message['to'] = EMAIL_TO
+    message['from'] = EMAIL_FROM
+
+    server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    server.ehlo()
+    server.starttls()
+    server.login(EMAIL_FROM, EMAIL_PASSWORD)
+    server.sendmail(EMAIL_FROM, EMAIL_TO, message.as_string())
+    server.close()
