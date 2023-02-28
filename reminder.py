@@ -33,3 +33,12 @@ def send_email(subject, body):
     server.login(EMAIL_FROM, EMAIL_PASSWORD)
     server.sendmail(EMAIL_FROM, EMAIL_TO, message.as_string())
     server.close()
+
+    # Main loop
+while True:
+    if is_laptop_on():
+        send_email('Take a break!', 'It has been two hours. Please take a 15-minute break.')
+        time.sleep(900) # 15 minutes
+        send_email('Resume work', 'Your break is over. Please resume work.')
+    else:
+        time.sleep(600) # 10 minutes
